@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="390dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    android:orientation="vertical"
+    android:background="@drawable/text"
+    android:id="@+id/lnnhanvien"
+    >
+    <LinearLayout
+        android:layout_width="390dp"
+        android:layout_height="170dp">
+
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/imgnv"
+            android:src="@drawable/nguoi"
+            android:layout_width="40dp"
+            android:layout_height="100dp"
+            android:layout_weight="2" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#131313"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:id="@+id/txtHovaTen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Họ và Tên: " />
+            <TextView
+                android:textColor="#131313"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:id="@+id/txtngaysinh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ngày Sinh: " />
+            <TextView
+                android:textColor="#131313"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:id="@+id/txtsodienthoai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Số Điện Thoại: " />
+            <TextView
+                android:textColor="#131313"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:id="@+id/txtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username: " />
+
+            <TextView
+                android:textColor="#131313"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password: " />
+
+            <TextView
+                android:textColor="#131313"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:id="@+id/txtChucVu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chức vụ: " />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

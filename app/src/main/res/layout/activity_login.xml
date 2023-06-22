@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+
+    >
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ĐĂNG NHẬP"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textColor="#101010"
+        />
+
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mời bạn đăng nhập tài khoản"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên đăng nhập"/>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ed_username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:startIconDrawable="@drawable/image3">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tentk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên Tài Khoản"
+            android:background="@drawable/text"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mật khẩu"/>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ed_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:startIconDrawable="@drawable/ic_lock_24"
+        app:passwordToggleEnabled="true"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mật khẩu"
+            android:id="@+id/txtmk"
+            android:background="@drawable/text"
+           android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="ĐĂNG NHẬP"
+        android:textSize="17dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnDangNhap"
+            android:background="@drawable/button"
+        android:textColor="@color/black"
+        />
+
+
+</LinearLayout>

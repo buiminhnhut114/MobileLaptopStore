@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="75dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cập Nhật Sản Phẩm"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/tvmasp1"
+            android:layout_marginLeft="45dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:text="Mã: 1"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edt_tensp1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/edittext_dialog"
+        android:padding="18dp"
+        android:hint="Tên sản phẩm"
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/ic_baseline_phone_24"
+        android:drawablePadding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
+    <EditText
+        android:id="@+id/edt_ngaynhap1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/edittext_dialog"
+        android:padding="18dp"
+        android:hint="Ngày Nhập"
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+        android:drawablePadding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
+    <EditText
+        android:id="@+id/edt_mausac1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/edittext_dialog"
+        android:padding="18dp"
+        android:hint="Màu Sắc"
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/ic_baseline_color_lens_24"
+        android:drawablePadding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
+    <EditText
+        android:id="@+id/edt_soluong1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/edittext_dialog"
+        android:padding="18dp"
+        android:hint="Số Lượng"
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/ic_baseline_numbers_24"
+        android:drawablePadding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
+    <EditText
+
+        android:id="@+id/edt_gianhap1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/edittext_dialog"
+        android:padding="18dp"
+        android:hint="Gía nhập"
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/ic_baseline_currency_exchange_24"
+        android:drawablePadding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
+    <EditText
+        android:id="@+id/edt_giaban1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/edittext_dialog"
+        android:padding="18dp"
+        android:hint="Gía bán"
+        android:textSize="15dp"
+        android:drawableLeft="@drawable/ic_baseline_currency_exchange_24"
+        android:drawablePadding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
+    <Spinner
+        android:id="@+id/edt_spp1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:padding="18dp"
+        android:hint="Gía bán"
+        android:textSize="15dp"
+        android:drawablePadding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_suadt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_dialog"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="Cập Nhật"
+        android:textStyle="bold"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:textColor="#0C0C0C"
+        android:id="@+id/tv_thoatdt1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Thoát"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

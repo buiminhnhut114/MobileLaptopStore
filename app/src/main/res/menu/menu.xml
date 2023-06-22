@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mtrangchu"
+        android:title="Trang Chủ"
+        android:icon="@drawable/ic_baseline_home_24"/>
+    <item android:id="@+id/mQLNhanVien"
+        android:title="Quản Lý Nhân Viên"
+        android:icon="@drawable/image6"/>
+
+    <item android:id="@+id/mQLDienThoai"
+        android:title="Quản lý Điện Thoại"
+        android:icon="@drawable/image7"/>
+
+    <item android:id="@+id/mQLKhachHang"
+        android:title="Quản lý Khách Hàng"
+        android:icon="@drawable/image9"/>
+
+    <item android:id="@+id/mQLDanhMuc"
+        android:title="Quản lý Danh Mục"
+        android:icon="@drawable/image10"/>
+
+    <item android:id="@+id/mQLKhuyenMai"
+        android:title="Quản lý Khuyến Mãi"
+        android:icon="@drawable/image11"/>
+
+    <item android:id="@+id/mQLHoaDon"
+        android:title="Quản lý Hóa Đơn"
+        android:icon="@drawable/image12"/>
+
+
+    <item android:title="Thống kê">
+        <menu>
+            <item android:id="@+id/mTop10"
+                android:title="Top 10"
+                android:icon="@drawable/image14"/>
+            <item android:id="@+id/mDoanhThu"
+                android:title="Doanh Thu"
+                android:icon="@drawable/image13"
+                />
+        </menu>
+    </item>
+
+    <item android:title="Khác">
+        <menu>
+            <item android:id="@+id/mdoiMK"
+                android:title="Đổi mật khẩu"
+                android:icon="@drawable/image15"/>
+            <item android:id="@+id/mThoat"
+                android:title="Thoát"
+                android:icon="@drawable/image16"
+                />
+        </menu>
+    </item>
+
+</menu>

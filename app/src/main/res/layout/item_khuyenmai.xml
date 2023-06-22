@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="390dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    android:orientation="vertical"
+    android:background="@drawable/text"
+    android:id="@+id/lnkm"
+    >
+
+    <LinearLayout
+        android:layout_width="390dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/imgkhuyenmai"
+            android:layout_marginLeft="15dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:src="@drawable/chietkhau" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtmakm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="Mã khuyến mãi:1 "
+                android:textColor="#131313"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/txtchietkhau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="Chiết khấu: 40% "
+                android:textColor="#131313"
+                android:textSize="17dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="7dp"
+                android:layout_width="250dp"
+                android:layout_height="30dp">
+            <TextView
+                android:id="@+id/txttungay"
+             android:textSize="17dp"
+             android:text="20/10/2022"
+             android:layout_marginTop="5dp"
+             android:layout_width="100dp"
+             android:layout_height="20dp"/>
+                <TextView
+                    android:textSize="17dp"
+                    android:text="-"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:id="@+id/txtdenngay"
+                    android:textSize="17dp"
+                    android:text="20/10/2022"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"/>
+                <ImageView
+                    android:src="@drawable/dongho"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
