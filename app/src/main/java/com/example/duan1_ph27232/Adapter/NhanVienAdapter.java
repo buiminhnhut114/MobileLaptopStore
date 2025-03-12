@@ -1,35 +1,22 @@
 package com.example.duan1_ph27232.Adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_ph27232.R;
-import com.example.duan1_ph27232.dao.NhanVienDAO;
-import com.example.duan1_ph27232.model.Admin;
 import com.example.duan1_ph27232.model.NhanVien;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.security.auth.callback.Callback;
 
 public class NhanVienAdapter extends RecyclerView.Adapter<NhanVienAdapter.ViewHolder>{
     private List<NhanVien> list;
@@ -49,29 +36,45 @@ public class NhanVienAdapter extends RecyclerView.Adapter<NhanVienAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.txtHoTen.setText("Họ và Tên: "+list.get(position).getTenNV());
-        holder.txtngaysinh.setText("Ngày Sinh: "+list.get(position).getNgaysinh());
-        holder.txtsodienthoai.setText("Số Điện Thoại: "+Integer.toString(list.get(position).getSodienthoai()));
-        holder.txtUser.setText("Username: "+list.get(position).getUsername());
-        holder.txtPass.setText("Password: "+list.get(position).getPassword());
-        holder.txtChucVu.setText("Chức vụ: "+list.get(position).getVaitro());
-        byte[] anh=list.get(position).getAnh();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(anh, 0,anh.length);
-        holder.imgnv.setImageBitmap(bitmap);
-holder.lnnv.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        callback.sua(list.get(position));
+        NhanVien nv = list.get(position);
+        holder.txtHoTen.setText("Họ và Tên: " + nv.getTenNV());
+        holder.txtngaysinh.setText("Ngày Sinh: " + nv.getNgaysinh());
+        holder.txtsodienthoai.setText("Số Điện Thoại: " + Integer.toString(nv.getSodienthoai()));
+        holder.txtUser.setText("Username: " + nv.getUsername());
+        holder.txtPass.setText("Password: " + nv.getPassword());
+        holder.txtChucVu.setText("Chức vụ: " + nv.getVaitro());
+
+        // Xử lý hình ảnh, tránh crash nếu dữ liệu ảnh bị null
+        byte[] anh = nv.getAnh();
+        if (anh != null && anh.length > 0) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(anh, 0, anh.length);
+            holder.imgnv.setImageBitmap(bitmap);
+        } else {
+            holder.imgnv.setImageResource(R.drawable.default_image);
+        }
+
+        // Xử lý sự kiện click để sửa nhân viên
+        holder.lnnv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callback != null) {
+                    callback.sua(nv);
+                }
+            }
+        });
+
+        // Xử lý sự kiện long click để xóa nhân viên
+        holder.lnnv.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (callback != null) {
+                    callback.xoa(nv);
+                }
+                return true;
+            }
+        });
     }
-});
-holder.lnnv.setOnLongClickListener(new View.OnLongClickListener() {
-    @Override
-    public boolean onLongClick(View v) {
-        callback.xoa(list.get(position));
-        return false;
-    }
-});
-    }
+
 
     @Override
     public int getItemCount() {

@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">DuAn1_PH27232</string>
+    <string name="app_name">Store Computer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="namegroup">Đỗ Minh Chương - 21207126"\n"Bùi Minh Nhựt  - 21207070"\n"L.N Xuân Đoàn  - 212070xx</string>
 </resources>

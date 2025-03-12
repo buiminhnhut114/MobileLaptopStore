@@ -8,54 +8,115 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    private static final int DATABASE_VERSION = 3; // Cập nhật version khi cần
+    private static final String DATABASE_NAME = "DIENTHOAI";
+
     public DBHelper(@Nullable Context context) {
-        super(context, "DIENTHOAI", null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String dbKhachHang= "CREATE TABLE KHACHHANG(maKH integer primary key autoincrement, " +
-                "tenKH TEXT,diachi text, email text,sodienthoai integer,anh BLOB) ";
+        // Tạo bảng KHÁCHHÀNG
+        String dbKhachHang = "CREATE TABLE KHACHHANG(" +
+                "maKH INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "tenKH TEXT, " +
+                "diachi TEXT, " +
+                "email TEXT, " +
+                "sodienthoai INTEGER, " +
+                "anh BLOB)";
         db.execSQL(dbKhachHang);
-        String dbDanhGia = "CREATE TABLE DANHGIA(maDG integer primary key autoincrement, " +
-                "ghichu TEXT,gio text,ngay text,maKH integer references KHACHHANG(maKH)) ";
+
+        // Tạo bảng ĐÁNHGIÁ
+        String dbDanhGia = "CREATE TABLE DANHGIA(" +
+                "maDG INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "ghichu TEXT, " +
+                "gio TEXT, " +
+                "ngay TEXT, " +
+                "maKH INTEGER REFERENCES KHACHHANG(maKH))";
         db.execSQL(dbDanhGia);
 
-        String dbKhuyenMai = "CREATE TABLE KHUYENMAI(maKM integer primary key autoincrement, " +
-                "chietkhau INTEGER,tungay text,denngay TEXT,anh BLOB) ";
+        // Tạo bảng KHUYẾNMÃI
+        String dbKhuyenMai = "CREATE TABLE KHUYENMAI(" +
+                "maKM INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "chietkhau INTEGER, " +
+                "tungay TEXT, " +
+                "denngay TEXT, " +
+                "anh BLOB)";
         db.execSQL(dbKhuyenMai);
 
-        String dbHoaDon = "CREATE TABLE HOADON(maHD integer primary key autoincrement,maSP integer references SANPHAM(maSP)," +
-                " tenSP text references SANPHAM(tenSP),giaban integer references SANPHAM(giaban),mausac text references SANPHAM(mausac),soluong integer," +
-                "tenKH Text references KHACHHANG(tenKH),sodienthoai integer references KHACHHANG(sodienthoai)," +
-                "diachi text references KHACHHANG(diachi),chietkhau integer references KHUYENMAI(chietkhau)," +
-                "ngaytao text,trangthai text,thanhtoan integer,maKH integer references KHACHHANG (maKH)) ";
-        db.execSQL(dbHoaDon);
-        String dbDanhMuc = "CREATE TABLE DANHMUC(maDM integer primary key autoincrement, tenDM TEXT,ANH BLOB) ";
+        // Tạo bảng DANHMỤC
+        String dbDanhMuc = "CREATE TABLE DANHMUC(" +
+                "maDM INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "tenDM TEXT, " +
+                "anh BLOB)";
         db.execSQL(dbDanhMuc);
 
-        String dbSanPham = "CREATE TABLE SANPHAM(maSP integer primary key autoincrement, tenSP text," +
-                "ngaynhap text,soluong integer,gianhap integer,giaban integer,mausac text, " +
-                "tenDM TEXT references DANHMUC(tenDM),anh BLOB) ";
+        // Tạo bảng SẢNPHẨM (tham chiếu cột tenDM của DANHMUC)
+        String dbSanPham = "CREATE TABLE SANPHAM(" +
+                "maSP INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "tenSP TEXT, " +
+                "ngaynhap TEXT, " +
+                "soluong INTEGER, " +
+                "gianhap INTEGER, " +
+                "giaban INTEGER, " +
+                "mausac TEXT, " +
+                "tenDM TEXT REFERENCES DANHMUC(tenDM), " +
+                "anh BLOB)";
         db.execSQL(dbSanPham);
 
+        // Tạo bảng HOÁĐƠN
+        // Lưu ý: Cột ngaytao được lưu theo định dạng "yyyy-MM-dd" (ví dụ: "2025-03-15")
+        String dbHoaDon = "CREATE TABLE HOADON(" +
+                "maHD INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "maSP INTEGER REFERENCES SANPHAM(maSP), " +
+                "tenSP TEXT REFERENCES SANPHAM(tenSP), " +
+                "giaban INTEGER REFERENCES SANPHAM(giaban), " +
+                "mausac TEXT REFERENCES SANPHAM(mausac), " +
+                "soluong INTEGER, " +
+                "tenKH TEXT REFERENCES KHACHHANG(tenKH), " +
+                "sodienthoai INTEGER REFERENCES KHACHHANG(sodienthoai), " +
+                "diachi TEXT REFERENCES KHACHHANG(diachi), " +
+                "chietkhau INTEGER REFERENCES KHUYENMAI(chietkhau), " +
+                "ngaytao TEXT, " +    // Lưu ngày theo định dạng "yyyy-MM-dd"
+                "trangthai TEXT, " +
+                "thanhtoan INTEGER, " +
+                "maKH INTEGER REFERENCES KHACHHANG(maKH))";
+        db.execSQL(dbHoaDon);
 
-        String dbNhanVien = "CREATE TABLE NHANVIEN(maNV integer primary key autoincrement, " +
-                "tenNV TEXT,ngaysinh text,sodienthoai integer, username text,password text,vaitro text,anh BLOB) ";
+        // Tạo bảng NHÂNVIÊN
+        String dbNhanVien = "CREATE TABLE NHANVIEN(" +
+                "maNV INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "tenNV TEXT, " +
+                "ngaysinh TEXT, " +
+                "sodienthoai INTEGER, " +
+                "username TEXT, " +
+                "password TEXT, " +
+                "vaitro TEXT, " +
+                "anh BLOB)";
         db.execSQL(dbNhanVien);
-                String dbadmin="CREATE TABLE ADMIN(maAM integer primary key autoincrement, " +
-                        "tenAM TEXT NOT NULL, tenDN TEXT NOT NULL, matkhau NOT NULL) ";
-                db.execSQL(dbadmin);
-        db.execSQL("INSERT INTO ADMIN VALUES (1,'Nguyen Hoang Tra','tra123','123456')");
 
+        // Tạo bảng ADMIN
+        String dbAdmin = "CREATE TABLE ADMIN(" +
+                "maAM INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "tenAM TEXT NOT NULL, " +
+                "tenDN TEXT NOT NULL, " +
+                "matkhau NOT NULL)";
+        db.execSQL(dbAdmin);
 
+        // Thêm 1 admin mặc định
+        db.execSQL("INSERT INTO ADMIN VALUES (1, 'Bui Minh Nhut', 'buiminhnhut', '123456')");
+
+        // Thêm dữ liệu mẫu cho bảng DANHMUC (chỉ 2 item: PC và Laptop)
+        db.execSQL("INSERT INTO DANHMUC(tenDM) VALUES('PC')");
+        db.execSQL("INSERT INTO DANHMUC(tenDM) VALUES('Laptop')");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        if(i != i1){
-            db.execSQL("DROP TABLE IF EXISTS KHACHHANG");
-            db.execSQL("DROP TABLE IF EXISTS NHANVIEN");
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(oldVersion != newVersion){
+            db.execSQL("DROP TABLE IF EXISTS KHACHHÀNG");
+            db.execSQL("DROP TABLE IF EXISTS NHANVIÊN");
             db.execSQL("DROP TABLE IF EXISTS DANHGIA");
             db.execSQL("DROP TABLE IF EXISTS KHUYENMAI");
             db.execSQL("DROP TABLE IF EXISTS HOADON");

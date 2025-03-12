@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,86 +13,97 @@
         android:textStyle="bold"
         android:textColor="#000000"
         android:textSize="20dp"/>
+
     <EditText
         android:id="@+id/edt_Hoten"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/edittext_dialog"
-        android:padding="18dp"
-        android:hint="Họ tên"
-        android:textSize="15dp"
         android:drawableLeft="@drawable/ic_baseline_person_outline_24_1"
         android:drawablePadding="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:hint="Họ tên"
+        android:padding="18dp"
+        android:textSize="15dp"
+        tools:ignore="TextSizeCheck" />
+
     <EditText
         android:id="@+id/edt_ngaysinh"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/edittext_dialog"
-        android:padding="18dp"
-        android:hint="Ngày Sinh"
-        android:textSize="15dp"
         android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
         android:drawablePadding="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:hint="Ngày Sinh"
+        android:padding="18dp"
+        android:textSize="15dp"
+        tools:ignore="TextSizeCheck" />
+
     <EditText
         android:id="@+id/edt_sodienthoai"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/edittext_dialog"
-        android:padding="18dp"
-        android:hint="Số Điện Thoại"
-        android:textSize="15dp"
         android:drawableLeft="@drawable/ic_baseline_phone_24"
         android:drawablePadding="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:hint="Số Điện Thoại"
+        android:padding="18dp"
+        android:textSize="15dp"
+        tools:ignore="TextSizeCheck" />
+
     <EditText
         android:id="@+id/edt_chucvu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/edittext_dialog"
-        android:padding="18dp"
-        android:hint="Chức vụ"
-        android:textSize="15dp"
         android:drawableLeft="@drawable/ic_baseline_person_24_1"
         android:drawablePadding="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:hint="Chức vụ"
+        android:padding="18dp"
+        android:textSize="15dp"
+        tools:ignore="TextSizeCheck" />
+
     <EditText
         android:id="@+id/edt_Tendangnhap"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/edittext_dialog"
-        android:padding="18dp"
-        android:hint="Tên đang nhập"
-        android:textSize="15dp"
         android:drawableLeft="@drawable/ic_baseline_person_24_1"
         android:drawablePadding="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:hint="Tên đang nhập"
+        android:padding="18dp"
+        android:textSize="15dp"
+        tools:ignore="TextSizeCheck" />
 
     <EditText
         android:id="@+id/edt_Matkhau"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/edittext_dialog"
-        android:padding="18dp"
-        android:hint="Mật khẩu"
-        android:textSize="13dp"
-        android:inputType="textPassword"
         android:drawableLeft="@drawable/ic_baseline_https_24_1"
         android:drawablePadding="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:hint="Mật khẩu"
+        android:inputType="textPassword"
+        android:padding="18dp"
+        android:textSize="13dp"
+        tools:ignore="TextSizeCheck" />
     <TextView
         android:textStyle="bold"
         android:textColorHint="#47C0F6"

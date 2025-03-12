@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.duan1_ph27232.DBHelper.DBHelper;
 import com.example.duan1_ph27232.model.HoaDon;
-import com.example.duan1_ph27232.model.SanPham;
 import com.example.duan1_ph27232.model.Top10;
 
 import java.util.ArrayList;
@@ -47,6 +46,7 @@ public class HoaDonDAO {
         }
         return list;
     }
+
     public boolean thayDoiTrangThai(int maHD){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         HoaDon hoaDon=new HoaDon();
@@ -131,19 +131,31 @@ public class HoaDonDAO {
         return list;
     }
     @SuppressLint("Range")
-    public List<Top10> getTop10(){
-        String sqlTop10 = "SELECT tenSP, count(tenSP) as soluong FROM HOADON GROUP BY tenSP ORDER BY soluong DESC LIMIT 10";
-        List<Top10> list = new ArrayList<Top10>();
+    public List<Top10> getTop10() {
+        // Câu lệnh JOIN HOADON (hd) với SANPHAM (sp) theo maSP
+        // Tính tổng số lượng bán bằng SUM(hd.soluong) và lấy cột anh từ SANPHAM
+        String sqlTop10 =
+                "SELECT sp.tenSP, SUM(hd.soluong) AS soluong, sp.anh " +
+                        "FROM HOADON hd " +
+                        "JOIN SANPHAM sp ON hd.maSP = sp.maSP " +
+                        "GROUP BY sp.maSP " +
+                        "ORDER BY soluong DESC " +
+                        "LIMIT 10";
+        List<Top10> list = new ArrayList<>();
         sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(sqlTop10, null);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             Top10 top10 = new Top10();
             top10.setTenSP(cursor.getString(cursor.getColumnIndex("tenSP")));
-            top10.setSoluongban(Integer.parseInt(cursor.getString(cursor.getColumnIndex("soluong"))));
+            top10.setSoluongban(cursor.getInt(cursor.getColumnIndex("soluong")));
+            // Lấy ảnh từ bảng SANPHAM (cột anh là BLOB)
+            top10.setAnh(cursor.getBlob(cursor.getColumnIndex("anh")));
             list.add(top10);
         }
+        cursor.close();
         return list;
     }
+
     @SuppressLint("Range")
     public int getDoanhthu (String tuNgay, String denNgay){
         String sqlDoanhThu = "SELECT SUM(giaban*soluong -((giaban*soluong*chietkhau)/100)) as doanhThu FROM HOADON WHERE ngaytao BETWEEN ? AND ?";

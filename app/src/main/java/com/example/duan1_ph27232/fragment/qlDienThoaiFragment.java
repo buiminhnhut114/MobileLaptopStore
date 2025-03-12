@@ -28,20 +28,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duan1_ph27232.Adapter.DanhMucAdapter;
 import com.example.duan1_ph27232.Adapter.DienThoaiAdapter;
-import com.example.duan1_ph27232.Adapter.KhachHangAdapter;
 import com.example.duan1_ph27232.MainActivity;
 import com.example.duan1_ph27232.R;
 import com.example.duan1_ph27232.dao.DanhMucDao;
 import com.example.duan1_ph27232.dao.DienThoaiDao;
-import com.example.duan1_ph27232.dao.KhachHangDao;
 import com.example.duan1_ph27232.model.DanhMuc;
-import com.example.duan1_ph27232.model.KhachHang;
 import com.example.duan1_ph27232.model.SanPham;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -121,7 +116,7 @@ public void loadata(){
     recyclerView.setLayoutManager(linearLayoutManager);
     adapter = new DienThoaiAdapter(list, this);
     recyclerView.setAdapter(adapter);
-    tongnv.setText("Điện Thoại: "+list.size());
+    tongnv.setText("Laptop/PC: " + list.size());
 }
 
     @Override
@@ -223,78 +218,123 @@ public void loadata(){
     public void showdialog(){
         final Dialog dialog = new Dialog(this, androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
         dialog.setContentView(R.layout.dialog_them_dienthoai);
-        edttensp=dialog.findViewById(R.id.edt_tensp);
-        edtgiaban=dialog.findViewById(R.id.edt_giaban);
-        edtgianhap=dialog.findViewById(R.id.edt_gianhap);
-        edtngaynhap=dialog.findViewById(R.id.edt_ngaynhap);
-        edtsoluong=dialog.findViewById(R.id.edt_soluong);
-        edtmausac=dialog.findViewById(R.id.edt_mausac);
-        btnthem=dialog.findViewById(R.id.btn_themdt);
-        imgdm=dialog.findViewById(R.id.imgthemanhdt);
-        spnthem=dialog.findViewById(R.id.edt_spp);
-       getDatadanhmuc(spnthem);
+
+        // Ánh xạ các view từ layout dialog
+        edttensp = dialog.findViewById(R.id.edt_tensp);
+        edtgiaban = dialog.findViewById(R.id.edt_giaban);
+        edtgianhap = dialog.findViewById(R.id.edt_gianhap);
+        edtngaynhap = dialog.findViewById(R.id.edt_ngaynhap);
+        edtsoluong = dialog.findViewById(R.id.edt_soluong);
+        edtmausac = dialog.findViewById(R.id.edt_mausac);
+        btnthem = dialog.findViewById(R.id.btn_themdt);
+        imgdm = dialog.findViewById(R.id.imgthemanhdt);
+        spnthem = dialog.findViewById(R.id.edt_spp);
+
+        // Load dữ liệu danh mục vào Spinner
+        getDatadanhmuc(spnthem);
+
+        // Xử lý chọn ảnh
         imgdm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pick=new Intent(Intent.ACTION_GET_CONTENT);
+                Intent pick = new Intent(Intent.ACTION_GET_CONTENT);
                 pick.setType("image/*");
-                Intent pho=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Intent chosser=Intent.createChooser(pick,"lua chon");
-                chosser.putExtra(Intent.EXTRA_INITIAL_INTENTS,new Intent[]{pho});
-                startActivityForResult(chosser,REQUEST_CODE_GALLERY);
+                Intent pho = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent chosser = Intent.createChooser(pick, "Chọn ảnh");
+                chosser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pho});
+                startActivityForResult(chosser, REQUEST_CODE_GALLERY);
             }
         });
+
+        // Xử lý chọn ngày nhập
         edtngaynhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(System.currentTimeMillis());
-                DatePickerDialog dialog1 = new DatePickerDialog(qlDienThoaiFragment.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dateDialog = new DatePickerDialog(qlDienThoaiFragment.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        int nam = i;
-                        int thang = i1;
-                        int ngay = i2;
-
-                        edtngaynhap.setText(ngay + "/" + (thang + 1) + "/" + nam);
+                    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                        edtngaynhap.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 },
                         calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DATE)
-                );
-                dialog1.show();
+                        calendar.get(Calendar.DATE));
+                dateDialog.show();
             }
         });
+
+        // Xử lý nút Thêm
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-dienThoaiDao=new DienThoaiDao(qlDienThoaiFragment.this);
-SanPham sp=new SanPham();
-sp.setSoluong(Integer.parseInt(edtsoluong.getText().toString()));
-sp.setMausac(edtmausac.getText().toString());
-sp.setGianhap(Integer.parseInt(edtgianhap.getText().toString()));
-sp.setNgaynhap(edtngaynhap.getText().toString());
-sp.setGiaban(Integer.parseInt(edtgiaban.getText().toString()));
-sp.setTenSP(edttensp.getText().toString());
-sp.setTenDM(spnthem.getSelectedItem().toString());
-byte[] anh=imageViewToByte(imgdm);
-sp.setAnh(anh);
-dienThoaiDao.them_sp(sp);
-loadata();
-Toast.makeText(qlDienThoaiFragment.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-dialog.dismiss();
+                // Kiểm tra dữ liệu của Spinner
+                Object selectedItem = spnthem.getSelectedItem();
+                if (selectedItem == null) {
+                    Toast.makeText(qlDienThoaiFragment.this, "Danh mục trống, vui lòng thêm danh mục", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Kiểm tra các trường bắt buộc không được rỗng
+                if (edttensp.getText().toString().trim().isEmpty() ||
+                        edtngaynhap.getText().toString().trim().isEmpty() ||
+                        edtsoluong.getText().toString().trim().isEmpty() ||
+                        edtgianhap.getText().toString().trim().isEmpty() ||
+                        edtgiaban.getText().toString().trim().isEmpty() ||
+                        edtmausac.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(qlDienThoaiFragment.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    dienThoaiDao = new DienThoaiDao(qlDienThoaiFragment.this);
+                    SanPham sp = new SanPham();
+
+                    // Chuyển đổi dữ liệu số
+                    sp.setSoluong(Integer.parseInt(edtsoluong.getText().toString()));
+                    sp.setGianhap(Integer.parseInt(edtgianhap.getText().toString()));
+                    sp.setGiaban(Integer.parseInt(edtgiaban.getText().toString()));
+
+                    // Gán các trường khác
+                    sp.setTenSP(edttensp.getText().toString());
+                    sp.setNgaynhap(edtngaynhap.getText().toString());
+                    sp.setMausac(edtmausac.getText().toString());
+                    sp.setTenDM(selectedItem.toString());
+
+                    // Lấy ảnh từ ImageView
+                    byte[] anh = imageViewToByte(imgdm);
+                    sp.setAnh(anh);
+
+                    // Thực hiện thêm sản phẩm
+                    boolean result = dienThoaiDao.them_sp(sp);
+                    if(result){
+                        loadata();
+                        Toast.makeText(qlDienThoaiFragment.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(qlDienThoaiFragment.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                    }
+                    dialog.dismiss();
+                } catch (NumberFormatException e) {
+                    Toast.makeText(qlDienThoaiFragment.this, "Lỗi định dạng số: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(qlDienThoaiFragment.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
         });
-        thoat=dialog.findViewById(R.id.tv_thoatdt);
+
+        // Xử lý nút Thoát
+        TextView thoat = dialog.findViewById(R.id.tv_thoatdt);
         thoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
+
         dialog.show();
     }
+
     public static byte[] imageViewToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

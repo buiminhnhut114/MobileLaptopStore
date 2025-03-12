@@ -1,8 +1,8 @@
 package com.example.duan1_ph27232.Adapter;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_ph27232.R;
-import com.example.duan1_ph27232.model.KhachHang;
 import com.example.duan1_ph27232.model.SanPham;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 public class DienThoaiAdapter extends RecyclerView.Adapter<DienThoaiAdapter.ViewHolder> {
@@ -37,30 +38,47 @@ public class DienThoaiAdapter extends RecyclerView.Adapter<DienThoaiAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.txtmasp.setText("Mã Sản phẩm: " +Integer.toString(list.get(position).getMaSP()) );
-        holder.txtsoluong.setText("Số lượng: " + Integer.toString(list.get(position).getSoluong()) );
-        holder.txtmausac.setText("Màu sắc: " + list.get(position).getMausac());
-        holder.txtgia.setText("Gía: " + list.get(position).getGiaban()+" VNĐ");
-        holder.txttensp.setText("Tên sản phẩm: "+list.get(position).getTenSP());
-        byte[] anh=list.get(position).getAnh();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(anh, 0,anh.length);
-        holder.imgkh.setImageBitmap(bitmap);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        SanPham sp = list.get(position);
+
+        holder.txtmasp.setText("Mã Sản phẩm: " + sp.getMaSP());
+        holder.txtsoluong.setText("Số lượng: " + sp.getSoluong());
+        holder.txtmausac.setText("Màu sắc: " + sp.getMausac());
+        holder.txttensp.setText("Tên sản phẩm: " + sp.getTenSP());
+
+        // Định dạng giá bán
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.'); // Dùng dấu chấm làm dấu phân cách
+        DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols);
+        String formattedPrice = decimalFormat.format(sp.getGiaban());
+
+        // Set text và màu đỏ
+        holder.txtgia.setText("Giá: " + formattedPrice + " VNĐ");
+        holder.txtgia.setTextColor(Color.RED);
+
+        // Hiển thị ảnh sản phẩm
+        byte[] anh = sp.getAnh();
+        if(anh != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(anh, 0, anh.length);
+            holder.imgkh.setImageBitmap(bitmap);
+        }
+
+        // Xử lý sự kiện click và long click
         holder.lnkh.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                callback.xoa(list.get(position));
+                callback.xoa(sp);
                 return false;
             }
         });
         holder.lnkh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.sua(list.get(position));
+                callback.sua(sp);
             }
         });
-
     }
+
 
     @Override
     public int getItemCount() {

@@ -8,7 +8,7 @@
         android:icon="@drawable/image6"/>
 
     <item android:id="@+id/mQLDienThoai"
-        android:title="Quản lý Điện Thoại"
+        android:title="Quản lý Laptop/PC"
         android:icon="@drawable/image7"/>
 
     <item android:id="@+id/mQLKhachHang"

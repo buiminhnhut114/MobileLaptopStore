@@ -4,18 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.duan1_ph27232.MainActivity;
 import com.example.duan1_ph27232.R;
@@ -46,13 +42,13 @@ public class qlDoanhThuFragment extends AppCompatActivity {
         imgDateEnd = (ImageView) findViewById(R.id.img_dateEnd);
         edtDateEnd = (EditText) findViewById(R.id.edt_dateEnd);
         tvDoanhthu = (TextView) findViewById(R.id.tv_doanhThu);
-comedoanhthu=findViewById(R.id.comedoanhthu);
-comedoanhthu.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        startActivity(new Intent(qlDoanhThuFragment.this, MainActivity.class));
-    }
-});
+        comedoanhthu=findViewById(R.id.comedoanhthu);
+        comedoanhthu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(qlDoanhThuFragment.this, MainActivity.class));
+            }
+        });
 
         imgDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,11 +76,23 @@ comedoanhthu.setOnClickListener(new View.OnClickListener() {
 
 
 
-        findViewById(R.id.btn_thongkeDoanhThu).setOnClickListener(v ->{
+        findViewById(R.id.btn_thongkeDoanhThu).setOnClickListener(v -> {
             String tuNgay = edtDateStart.getText().toString();
             String denNgay = edtDateEnd.getText().toString();
+
+            // Lấy giá trị doanh thu từ DB
             HoaDonDAO daoHoaDon = new HoaDonDAO(qlDoanhThuFragment.this);
-            tvDoanhthu.setText("  "+daoHoaDon.getDoanhthu(tuNgay, denNgay) +"VNĐ");
+            int doanhThu = daoHoaDon.getDoanhthu(tuNgay, denNgay);
+
+            // Định dạng số: #,### (tự động thêm dấu phẩy cho hàng nghìn, triệu,...)
+            // Nếu doanhThu lớn, bạn có thể dùng "#,###,###,###" hoặc NumberFormat.getNumberInstance(...)
+            java.text.DecimalFormat decimalFormat = new java.text.DecimalFormat("#,###");
+            String doanhThuStr = decimalFormat.format(doanhThu);
+
+            // Set text kèm "VNĐ" và đổi màu chữ sang đỏ
+            tvDoanhthu.setText(doanhThuStr + " VNĐ");
+            tvDoanhthu.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            // Hoặc: tvDoanhthu.setTextColor(Color.RED);
         });
     }
     DatePickerDialog.OnDateSetListener dateEnd = new DatePickerDialog.OnDateSetListener() {
@@ -108,7 +116,7 @@ comedoanhthu.setOnClickListener(new View.OnClickListener() {
         }
     };
 
-    }
+}
 
 
 

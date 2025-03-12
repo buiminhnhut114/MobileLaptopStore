@@ -1,67 +1,59 @@
 package com.example.duan1_ph27232;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.content.ContextCompat;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.duan1_ph27232.dao.AdminDao;
 import com.example.duan1_ph27232.model.Admin;
 import com.google.android.material.textfield.TextInputEditText;
+import java.util.Objects;
 
 public class DangKyActivity extends AppCompatActivity {
-AppCompatButton btndangki;
-TextInputEditText txthoten,txttentkdk,txtmkdk,txtnhaplai;
-    @SuppressLint("MissingInflatedId")
+    AppCompatButton btndangki;
+    TextInputEditText txthoten, txttentkdk, txtmkdk, txtnhaplai;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky);
-        txthoten=findViewById(R.id.txthotendn);
-        txtmkdk=findViewById(R.id.txtmkdk);
-        txttentkdk=findViewById(R.id.txttentk);
-        txtnhaplai=findViewById(R.id.txtnhaplai);
-        btndangki=findViewById(R.id.btndangki1);
-        String pass = txtmkdk.getText().toString();
-        String repass =txtnhaplai.getText().toString();
-        btndangki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (txthoten.length()==0) {
-                    txthoten.setTextColor(Color.RED);
-                    Toast.makeText(DangKyActivity.this, "Không để trống", Toast.LENGTH_SHORT).show();
-                }
-                if (txttentkdk.length()==0) {
-                    txttentkdk.setTextColor(Color.RED);
-                    Toast.makeText(DangKyActivity.this, "Không để trống", Toast.LENGTH_SHORT).show();
-                }
-                if (txtmkdk.length()==0) {
-                    txtmkdk.setTextColor(Color.RED);
-                    Toast.makeText(DangKyActivity.this, "Không để trống", Toast.LENGTH_SHORT).show();
-                }
-                if (txthoten.length()!=0 && txttentkdk.length()!=0 &&txtmkdk.length()!=0&&txtnhaplai.length()!=0) {
-                    AdminDao daoNguoiDung = new AdminDao(DangKyActivity.this);
-                    Admin nguoiDung = new Admin();
-                    nguoiDung.setTenAM(txthoten.getText().toString());
-                    nguoiDung.setTenDN(txttentkdk.getText().toString());
-                    nguoiDung.setMatkhau(txtmkdk.getText().toString());
-                    if (pass.equals(repass)) {
-                        if (daoNguoiDung.them_NguoiDung(nguoiDung) == true) {
-                       startActivity(new Intent(DangKyActivity.this,LoginActivity.class));
-                            Toast.makeText(DangKyActivity.this, "Đăng kí thành công mời đăng nhập", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(DangKyActivity.this, "Không để trống", Toast.LENGTH_SHORT).show();
-                        }
-                    }else {
-                        Toast.makeText(DangKyActivity.this, "Password không giống, mời nhập lại", Toast.LENGTH_SHORT).show();
-                    }
-                }
+
+        // Ánh xạ View
+        txthoten    = findViewById(R.id.txthotendn);
+        txttentkdk  = findViewById(R.id.txttentk);
+        txtmkdk     = findViewById(R.id.txtmkdk);
+        txtnhaplai  = findViewById(R.id.txtnhaplai);
+        btndangki   = findViewById(R.id.btndangki1);
+
+        btndangki.setOnClickListener(v -> {
+            String hoten   = Objects.requireNonNull(txthoten.getText()).toString().trim();
+            String user    = Objects.requireNonNull(txttentkdk.getText()).toString().trim();
+            String pass    = Objects.requireNonNull(txtmkdk.getText()).toString().trim();
+            String repass  = Objects.requireNonNull(txtnhaplai.getText()).toString().trim();
+
+            if (hoten.isEmpty() || user.isEmpty() || pass.isEmpty() || repass.isEmpty()) {
+                Toast.makeText(DangKyActivity.this, "Không để trống các trường!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!pass.equals(repass)) {
+                Toast.makeText(DangKyActivity.this, "Mật khẩu nhập lại không khớp!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            AdminDao daoNguoiDung = new AdminDao(DangKyActivity.this);
+            Admin nguoiDung = new Admin();
+            nguoiDung.setTenAM(hoten);
+            nguoiDung.setTenDN(user);
+            nguoiDung.setMatkhau(pass);
+
+            boolean isInserted = daoNguoiDung.them_NguoiDung(nguoiDung);
+            if (isInserted) {
+                Toast.makeText(DangKyActivity.this, "Đăng ký thành công! Mời đăng nhập.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DangKyActivity.this, LoginActivity.class));
+                finish();
+            } else {
+                Toast.makeText(DangKyActivity.this, "Đăng ký thất bại hoặc tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
             }
         });
     }

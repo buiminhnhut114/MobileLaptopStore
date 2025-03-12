@@ -4,10 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
@@ -16,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.duan1_ph27232.Adapter.PhotoAdapter;
 import com.example.duan1_ph27232.LoginActivity;
@@ -71,18 +70,18 @@ ImageView iconnhanvien;
         if (id!=1){
             imgavtar.setImageResource(R.drawable.avatar);
             tvwelcome.setText("WELCOME USER");
-            tvten.setText("phone shop employee");
+            tvten.setText("Computer Shop Manager");
         }
         else {
             imgavtar.setImageResource(R.drawable.tra);
             tvwelcome.setText("WELCOME ADMIN");
-            tvten.setText("phone shop manager");
+            tvten.setText("Computer Shop Manager");
         }
         list = new ArrayList<>();
         adapter = new PhotoAdapter(getContext(), list);
-        list.add(new Photo(R.drawable.iphone));
-        list.add(new Photo(R.drawable.samsung));
-        list.add(new Photo(R.drawable.vivo));
+        list.add(new Photo(R.drawable.sale_laptop));
+        list.add(new Photo(R.drawable.sale_laptop));
+        list.add(new Photo(R.drawable.sale_pc));
         viewPager2.setAdapter(adapter);
         circleIndicator3.setViewPager(viewPager2);
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
