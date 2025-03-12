@@ -68,9 +68,21 @@ Dự án sử dụng một số thư viện chính như sau:
 - **JUnit** / **Espresso**: Hỗ trợ kiểm thử.
 
 ---
+## 4. DEMO
+![IMG_2426](https://github.com/user-attachments/assets/78b63587-2ac1-4abd-bf79-9f0ad695b368)
+![IMG_2425](https://github.com/user-attachments/assets/12ff91cb-ebfe-43bd-9a43-532354a1af76)
+![IMG_2424](https://github.com/user-attachments/assets/e051346a-0441-436b-ad42-8f7b5a1f5f79)
+![IMG_2423](https://github.com/user-attachments/assets/ac6a8915-7ace-4103-948f-7427e3e55a91)
+![IMG_2422](https://github.com/user-attachments/assets/bcdf6fea-edb6-48e5-9361-64c5f2e350c2)
+![IMG_2421](https://github.com/user-attachments/assets/4e5df2db-9b8f-482c-a6fb-114cae3feaf5)
+![IMG_2420](https://github.com/user-attachments/assets/701b1034-7d96-485d-82e7-b581b4abc1fe)
+![IMG_2419](https://github.com/user-attachments/assets/c4dddf26-664e-4e33-a292-01bb18de9e1e)
+![IMG_2418](https://github.com/user-attachments/assets/80ca8a4c-5276-4eb0-8e16-dc408e64b243)
+![IMG_2417](https://github.com/user-attachments/assets/1611d30b-794d-4ad2-a200-3a15abf98053)
+
 
 <a name="cau-hinh-gradle"></a>
-## 4. Cấu hình Gradle
+## 5. Cấu hình Gradle
 
 Dưới đây là một số thông tin quan trọng về cấu hình Gradle của dự án.
 
