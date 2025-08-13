@@ -1,6 +1,6 @@
-# DUAN1_PH27232
+# MobileLaptopStore
 
-Chào mừng bạn đến với **DUAN1_PH27232**, một ứng dụng Android (Java) phục vụ quản lý và mua bán (E-commerce) các sản phẩm Laptop/PC. Dự án sử dụng Android SDK và các thư viện giao diện hiện đại nhằm mang lại trải nghiệm tốt nhất cho người dùng.
+Chào mừng bạn đến với **MobileLaptopStore**, một ứng dụng Android (Java) phục vụ quản lý và mua bán (E-commerce) các sản phẩm Laptop/PC. Dự án sử dụng Android SDK và các thư viện giao diện hiện đại nhằm mang lại trải nghiệm tốt nhất cho người dùng.
 
 ---
 
@@ -16,7 +16,7 @@ Chào mừng bạn đến với **DUAN1_PH27232**, một ứng dụng Android (J
 <a name="gioithieu"></a>
 ## 1. Giới thiệu
 
-**DUAN1_PH27232** là đồ án trong môn **Lập trình di động**, tập trung vào phát triển ứng dụng mua bán Laptop/PC trên nền tảng Android. Ứng dụng cung cấp:
+**MobileLaptopStore** là đồ án trong môn **Lập trình di động**, tập trung vào phát triển ứng dụng mua bán Laptop/PC trên nền tảng Android. Ứng dụng cung cấp:
 
 - **Danh mục sản phẩm** (Laptop, PC, phụ kiện, …).  
 - **Tìm kiếm, lọc sản phẩm** theo nhiều tiêu chí.  
