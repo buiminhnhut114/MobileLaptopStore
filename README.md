@@ -189,7 +189,7 @@ Nếu có bất kỳ góp ý hay thắc mắc nào, vui lòng mở **Issue** tr�
 ---
 
 ### **Lời cuối**
-Cảm ơn bạn đã quan tâm đến **DUAN1_PH27232**!  
+Cảm ơn bạn đã quan tâm đến **MobileLaptopStore**!  
 Nếu bạn gặp bất kỳ khó khăn nào trong quá trình cài đặt hoặc sử dụng, hãy liên hệ với chúng tôi để được hỗ trợ.  
 Chúc bạn một ngày tốt lành! 🎉
 
