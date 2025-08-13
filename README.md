@@ -43,7 +43,7 @@ Với việc sử dụng Java làm ngôn ngữ chính, kết hợp nhiều thư 
    - Khuyến nghị sử dụng **Android Studio Chipmunk (2021.2.1)** hoặc phiên bản mới hơn.
 
 3. **Đồng bộ (build) dự án**  
-   - Chờ Android Studio tải và cấu hình thư viện phụ thuộc.  
+   - Chờ Android Studio tải, cấu hình thư viện phụ thuộc.  
    - Kiểm tra **minSdk = 21**, **targetSdk = 32**, **compileSdk = 32**.  
 
 4. **Kết nối thiết bị Android**  
